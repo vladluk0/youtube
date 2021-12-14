@@ -51,4 +51,5 @@ dependencies {
     implementation(libs.bundles.main)
     implementation(libs.constraintlayout)
     implementation(libs.bundles.compose)
+    implementation(libs.compose.navigation)
 }
