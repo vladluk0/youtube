@@ -1,6 +1,7 @@
 package com.example.youtube.home.main
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.annotation.DrawableRes
@@ -8,23 +9,25 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.res.colorResource
-import androidx.compose.ui.res.imageResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination.Companion.hierarchy
-import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
 import com.example.youtube.AppNavigation
 import com.example.youtube.R
 import com.example.youtube.Screen
+import com.example.youtube.data.local.repositories.VideosViewModel
+import com.example.youtube.home.appComponent
 import com.example.youtube.ui.theme.YoutubeTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        val videosViewModel = appComponent.multiViewModelFactory.create(VideosViewModel::class.java)
+        videosViewModel.show()
         setContent {
             YoutubeTheme {
                 // A surface container using the 'background' color from the theme
@@ -134,3 +137,5 @@ sealed class NavigationItem(
     object SubscriptionItem : NavigationItem(Screen.Subscriptions, R.drawable.ic_subscriptions, "", "Підписки")
     object LibraryItem : NavigationItem(Screen.Library, R.drawable.ic_library, "", "Бібліотека")
 }
+
+
